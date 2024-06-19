@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Películas</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Listado de Películas</h1>
+    <div id="peliculas"></div>
+
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: '/peliculas',
+                type: 'GET',
+                success: function (data) {
+                    var peliculas = '';
+                    data.forEach(function (pelicula) {
+                        peliculas += '<div>';
+                        peliculas += '<h2>' + pelicula.nombre + '</h2>';
+                        peliculas += '<p><strong>Popularidad:</strong> ' + pelicula.popularidad + '</p>';
+                        peliculas += '<p><strong>Fecha de Estreno:</strong> ' + pelicula.fecha_de_estreno + '</p>';
+                        peliculas += '<p><strong>Promedio de Votos:</strong> ' + pelicula.promedio_de_votos + '</p>';
+                        peliculas += '<p><strong>Cantidad de Votos:</strong> ' + pelicula.cantidad_de_votos + '</p>';
+                        peliculas += '</div>';
+                    });
+                    $('#peliculas').html(peliculas);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
